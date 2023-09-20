@@ -111,16 +111,48 @@ It can be used for the following purposes under UNIX or Linux.
 * Combine text files  
 * Create new text files  
 ```bash
-cat filename
-cat file1 file2 
-cat file1 file2 > newcombinedfile
-cat < file1 > file2 #copy file1 to file2
+lsb_release -a > LinuxDistroInfo
+cat /etc/os-release
+cat LinuxDistroInfo /etc/os-release 
+cat LinuxDistroInfo /etc/os-release > CombinedLinuxDistroInfo
+cat < LinuxDistroInfo > CombinedLinuxDistroInfo #copy LinuxDistroInfo to CombinedLinuxDistroInfo
 ```
 
 ### b. `chmod`
 The chmod command stands for "change mode" and allows you to change the read, write, and execute permissions on your files and folders. For more information on this command check this [link](https://ss64.com/bash/chmod.html).
+
+Note: The Entities that can be granted access to are the User, Group and Others.
+Example Use cases.  
+* Create a file and give read(4), write(2), and execute(1) permissions to the user only
+* Create a directory and give read and write permissions to the user and group, and only read permission to others  
+* Create a script and give execute permissions to everyone  
+* Create a file in a directory and remove execute permissions from group and others for that directory
+* Create a file and change permissions using symbolic notation 
 ```bash
 chmod -options filename
+
+# Create a file and give read(4), write(2), and execute(1) permissions to the user only
+touch private_file
+chmod 700 private_file
+
+# Create a directory and give read and write permissions to the user and group, and only read permission to others
+mkdir shared_directory
+chmod 664 shared_directory
+
+# Create a script and give execute permissions to everyone
+echo "#!/bin/bash" > script.sh
+echo "echo Hello, world!" >> script.sh
+chmod +x script.sh
+
+# Create a file in a directory and remove execute permissions from group and others for that directory
+mkdir my_directory
+touch my_directory/my_file
+chmod go-x my_directory
+
+# Create a file and change permissions using symbolic notation
+touch my_file
+chmod u=rwx,g=rx,o=r my_file
+
 ```
 
 ### c. `chown`
